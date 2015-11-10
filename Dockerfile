@@ -29,6 +29,7 @@ RUN apt-get -q update && \
     build-essential \
     cmake \
     python-dev \
+    exuberant-ctags \
     && \
   apt-get clean && \
   rm /var/lib/apt/lists/*_*
@@ -52,6 +53,7 @@ RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe && \
     git clone https://github.com/garyburd/go-explorer.git ~/.vim/bundle/go-explorer && \
     git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree && \
+    git clone https://github.com/majutsushi/tagbar.git ~/.vim/bundle/tagbar && \
     git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
 
 RUN cd ~/.vim/bundle/YouCompleteMe && git submodule update --init --recursive && ./install.sh
