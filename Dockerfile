@@ -54,6 +54,14 @@ RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     git clone https://github.com/garyburd/go-explorer.git ~/.vim/bundle/go-explorer && \
     git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree && \
     git clone https://github.com/majutsushi/tagbar.git ~/.vim/bundle/tagbar && \
+    git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized && \
+    git clone https://github.com/mbbill/undotree.git ~/.vim/bundle/undotree && \
+    git clone https://github.com/tpope/vim-surround.git ~/.vim/bundle/surround && \
+    git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic && \
+    git clone https://github.com/bling/vim-airline.git ~/.vim/bundle/vim-airline && \
+    git clone https://github.com/spf13/vim-autoclose.git ~/.vim/bundle/vim-autoclose && \
+    git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive && \
+    git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/bundle/vim-easymotion && \
     git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
 
 RUN cd ~/.vim/bundle/YouCompleteMe && git submodule update --init --recursive && ./install.sh

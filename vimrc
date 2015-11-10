@@ -14,12 +14,21 @@
 
 execute pathogen#infect()
 syntax on
+set background=dark
+colorscheme solarized
 filetype plugin indent on
 
 let mapleader=","
 set tabstop=4
 set shiftwidth=4
+" Fixes issues with Nerdtree arrows and navigation
 set encoding=utf-8
+
+set mouse+=a
+if &term =~ '^screen'
+        " tmux knows the extended mouse mode
+         set ttymouse=xterm2
+ endif
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -44,3 +53,5 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
 map <C-n> :NERDTreeToggle<CR>
+
+map <C-t> :TagbarToggle<CR> 
