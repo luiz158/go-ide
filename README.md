@@ -1,4 +1,4 @@
-Go IDE in a Container
+Go IDE (Vim) in a Container
 =========================
 
 This is an example container that packages zsh, vim, and Go-related plugins in a single container.
@@ -10,11 +10,11 @@ Running the Container
 ---------------------
 To run this container:
 
-    $ docker run -ti byrnedo/go-ide 
+    $ docker run -ti byrnedo/go-ide vim
     
 Mount a volume so you don't lose your work:
 
-    $ docker run -v /some/path:/go/src -ti byrnedo/go-ide
+    $ docker run -v /some/path:/go/src -ti byrnedo/go-ide vim
 
 Or, mount a volume from a named container.
 
