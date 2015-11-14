@@ -19,6 +19,15 @@ filetype plugin indent on
 let mapleader=","
 set tabstop=4
 set shiftwidth=4
+set number
+
+" Show ascii/unicode char code in status
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
+
+" Highlight spaces
+autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+highlight EOLWS ctermbg=red guibg=red
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
