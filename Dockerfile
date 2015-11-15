@@ -10,6 +10,7 @@ RUN apt-get -q update && \
     tmux \
     curl \
     git \
+    rubygems \
     vim-nox \
     build-essential \
     cmake \
