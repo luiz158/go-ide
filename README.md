@@ -1,5 +1,5 @@
 Python IDE in a Container
-=========================
+=========================+
 
 This is an example container that packages zsh, tmux, tmuxinator, vim, and Python-related plugins in a single container.
 This example assumes you know how to run Docker.
