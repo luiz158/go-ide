@@ -1,46 +1,168 @@
-" Copyright 2015 Google Inc.
-"
-" Licensed under the Apache License, Version 2.0 (the "License");
-" you may not use this file except in compliance with the License.
-" You may obtain a copy of the License at
-"
-"     http://www.apache.org/licenses/LICENSE-2.0
-"
-" Unless required by applicable law or agreed to in writing, software
-" distributed under the License is distributed on an "AS IS" BASIS,
-" WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-" See the License for the specific language governing permissions and
-" limitations under the License.
+" Example Vim configuration.
+" Copy or symlink to ~/.vimrc or ~/_vimrc.
 
+"Pathogen configuration
 execute pathogen#infect()
-syntax on
-filetype plugin indent on
 
-let mapleader=","
-set tabstop=4
-set shiftwidth=4
+set nocompatible                  " Must come first because it changes other options.
 
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>e <Plug>(go-rename)
+syntax enable                     " Turn on syntax highlighting.
+filetype plugin indent on         " Turn on file type detection.
 
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+runtime macros/matchit.vim        " Load the matchit plugin.
 
-let g:go_fmt_command = "goimports"
+set showcmd                       " Display incomplete commands.
+set showmode                      " Display the mode you're in.
 
-" fixes not being able to navigate subdirectories http://stackoverflow.com/a/8758710/105282
-let g:NERDTreeDirArrows=0
+set backspace=indent,eol,start    " Intuitive backspacing.
+
+set hidden                        " Handle multiple buffers better.
+
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
+
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
+
+set number                        " Show line numbers.
+set ruler                         " Show cursor position.
+
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+
+set wrap                          " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
+
+set title                         " Set the terminal's title
+
+set visualbell                    " No beeping.
+
+" Setting shell for vim
+set shell=sh
+
+" Syntax Completion
+filetype plugin on
+set ofu=syntaxcomplete#Complete
+
+" syntastic
+let g:syntastic_go_checkers = []
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+
+set nobackup                      " Don't make a backup before overwriting a file.
+set nowritebackup                 " And again.
+set directory=.,$TEMP  " Keep swap files in one location
+set backupdir=.,$TEMP  " Keep swap files in one location
+
+" UNCOMMENT TO USE
+set expandtab                    " Use spaces instead of tabs
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+set laststatus=2                  " Show the status line all the time
+
+" Useful status information at bottom of screen
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
+" NERDTree
+let NERDTreeShowHidden=0
+
+" CtrlP
+if executable('ag')
+        " Use ag over grep
+        set grepprg=ag\ --nogroup\ --nocolor
+
+        " Use ag in CtrlP for listing files. Lightning fast and
+        " respects .gitignore
+        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+        " ag is fast enough that CtrlP doesn't need to cache
+        let g:ctrlp_use_caching = 0
+endif
+
+" Color Scheme
+set t_Co=256
+hi Search term=reverse cterm=reverse gui=reverse ctermfg=237
+
+" Map cursor for insert mode
+let &t_SI .= "\<Esc>[5 q"
+" solid block
+let &t_EI .= "\<Esc>[2 q"
+" 1 or 0 -> blinking block
+" 3 -> blinking underscore
+" Recent versions of xterm (282 or above) also support
+" 5 -> blinking vertical bar
+" 6 -> solid vertical bar
+
+" Splitting
+map <Leader>- :split<CR>
+map <Leader><bar> :vsplit<CR>
+
+map <leader>n :NERDTreeToggle<cr>
+map <leader>g :Git<Space>
+map <leader>c :CtrlPClearAllCaches<cr>
+map <leader>/ :Ack<Space>
+map <leader>p :YRShow<cr>
+
+" Removing search highlighting
+nnoremap <ESC><ESC> :nohlsearch<CR>
+
+" split naviagation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Zencoding
+let g:user_zen_expandabbr_key='<C-e>'
+let g:user_zen_settings = { 'erb': { 'extends': 'html' } }
+
+" disable arrow keys
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
+
+" Relative line numbers
+function! NumberToggle()
+        if(&relativenumber == 1)
+                set number
+        else
+                set relativenumber
+        endif
+endfunc
+
+" variations of html
+au BufReadPost *.gtpl set syntax=html
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+" Tagbar bindings
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
