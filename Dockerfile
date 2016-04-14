@@ -29,6 +29,7 @@ RUN apt-get -q update && \
     build-essential \
     cmake \
     python-dev \
+    tree \
     && \
   apt-get clean && \
   rm /var/lib/apt/lists/*_*
@@ -43,7 +44,8 @@ RUN go get github.com/nsf/gocode \
            github.com/golang/lint/golint \
            github.com/kisielk/errcheck \
            github.com/jstemmer/gotags \
-           github.com/garyburd/go-explorer/src/getool
+           github.com/garyburd/go-explorer/src/getool \
+	   github.com/codegangsta/cli
 
 RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
