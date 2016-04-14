@@ -30,6 +30,7 @@ RUN apt-get -q update && \
     cmake \
     python-dev \
     tree \
+    htop \
     && \
   apt-get clean && \
   rm /var/lib/apt/lists/*_*
