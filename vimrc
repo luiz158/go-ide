@@ -19,6 +19,7 @@ filetype plugin indent on
 let mapleader=","
 set tabstop=4
 set shiftwidth=4
+set nu
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
